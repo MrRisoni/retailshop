@@ -17,7 +17,8 @@ namespace retailshop
                 using (IDbConnection db = new System.Data.SqlClient.SqlConnection("Server=localhost;Database=multishopdb;Trusted_Connection=True;"))
                 {
 
-                    categories = db.Query<ProductCategory>("SELECT * FROM dbo.product_categories").ToList();
+                    //   categories = db.Query<ProductCategory>("SELECT * FROM dbo.product_categories").ToList();
+                      categories = db.Query<ProductCategory>("EXEC   dbo.FetchTopCategory").ToList();
                     Console.WriteLine(categories.ElementAt(0).title);
                 }
                 Console.WriteLine("Adieu World!");
