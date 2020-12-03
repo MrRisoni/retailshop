@@ -1,8 +1,5 @@
-﻿using Dapper;
+﻿using retailshop.Entities;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace retailshop
 {
@@ -13,14 +10,7 @@ namespace retailshop
             Console.WriteLine("Hello World!");
             try
             {
-                List<ProductCategory> categories = new List<ProductCategory>();
-                using (IDbConnection db = new System.Data.SqlClient.SqlConnection("Server=localhost;Database=multishopdb;Trusted_Connection=True;"))
-                {
-
-                    //   categories = db.Query<ProductCategory>("SELECT * FROM dbo.product_categories").ToList();
-                      categories = db.Query<ProductCategory>("EXEC   dbo.FetchTopCategory").ToList();
-                    Console.WriteLine(categories.ElementAt(0).title);
-                }
+                Fetcher.getTopProductCategories();
                 Console.WriteLine("Adieu World!");
             }
             catch (Exception ex)
