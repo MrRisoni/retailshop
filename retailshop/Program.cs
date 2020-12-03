@@ -11,6 +11,7 @@ namespace retailshop
             try
             {
                 Fetcher.getTopProductCategories();
+                Fetcher.getCampaignRecipients();
                 Console.WriteLine("Adieu World!");
             }
             catch (Exception ex)
