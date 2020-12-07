@@ -57,3 +57,4 @@ namespace retailshop.Entities
 
 }
 
+EXECUTE LastTKSegments 'PUSHKI', 452875
