@@ -13,9 +13,9 @@ namespace retailshop.Entities
         private static SqlConnection dbObj = null;
         private static SqlConnection getConnection()
         {
-          
+
             return new System.Data.SqlClient.SqlConnection("Server=localhost;Database=multishopdb;Trusted_Connection=True;");
-            
+
         }
 
         public static void getTopProductCategories()
@@ -30,7 +30,7 @@ namespace retailshop.Entities
         }
 
 
-        public static void getCampaignRecipients(String campaignCode  = "BLACK_FRIDAY_2020")
+        public static void getCampaignRecipients(String campaignCode = "BLACK_FRIDAY_2020")
         {
             using (IDbConnection db = Fetcher.getConnection())
             {
@@ -38,8 +38,8 @@ namespace retailshop.Entities
                     " NR JOIN newsletter_campaigns NC ON NC.id = NR.campaign_id " +
                     "  WHERE NC.code = 'BLACK_FRIDAY_2020' ").ToList().ElementAt(0);
                 Console.WriteLine("Total " + total);
-             }
-               
+            }
+
         }
         public static void getCampaignSuccess()
         {
@@ -52,9 +52,33 @@ namespace retailshop.Entities
             }
         }
 
+        public static void getTopCampaignProducts()
+        {
+            List<TopCampaignProducts> toplist = new List<TopCampaignProducts>();
+
+            using (IDbConnection db  =Fetcher.getConnection())
+            {
+                toplist = db.Query<TopCampaignProducts>("EXECUTE dbo.GetTopProductsFromCampaign'BLACK_FRIDAY_2020'").ToList();
+                foreach (TopCampaignProducts tp in toplist)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("-------------------");
+                    Console.Write(tp.product_id);
+                    Console.Write(" | ");
+                    Console.Write(tp.title);
+                    Console.Write(" | ");
+                    Console.Write(tp.totalQuantity);
+                    Console.Write(" | ");
+                    Console.Write(tp.totalOrders);
+                    Console.Write(" | ");
+                    Console.Write(tp.totalNet);
+                    Console.Write(" | ");
+                    Console.Write(tp.salesPercent);
+                }
+            }
+        }
+         
     }
 
 
 }
-
-EXECUTE LastTKSegments 'PUSHKI', 452875
